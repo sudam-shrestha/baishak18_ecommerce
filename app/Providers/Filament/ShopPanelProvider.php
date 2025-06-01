@@ -27,7 +27,6 @@ class ShopPanelProvider extends PanelProvider
             ->path('shop')
             ->login()
             ->authGuard('vendor')
-            ->registration()
             ->colors([
                 'primary' => Color::Amber,
             ])
