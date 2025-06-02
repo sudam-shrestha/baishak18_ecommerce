@@ -16,6 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('profile')->nullable();
+            $table->string('pan_no')->unique()->nullable();
+            $table->string('contact_no');
+            $table->string('address');
+            $table->date('expire_date')->nullable();
+            $table->enum('status',['pending','approved','rejected'])->default('pending');
             $table->rememberToken();
             $table->timestamps();
         });
