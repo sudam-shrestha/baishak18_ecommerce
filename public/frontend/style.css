@@ -2,7 +2,7 @@
     --primary-color: #009900;
     --secondary-color: #ffcc33;
     --ancient-color: #202020;
-    --paragraph: #333333;
+    --paragraph: #474747;
 }
 
 body {
@@ -11,6 +11,7 @@ body {
 
 p {
     color: var(--paragraph);
+    font-size: 14px;
 }
 
 .container {
