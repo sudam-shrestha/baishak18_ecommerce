@@ -1,4 +1,32 @@
 <x-frontend-layout>
+
+    <section>
+        <div class="container py-10">
+            <div>
+                <h2 class="text-2xl text-[var(--primary-color)]">Featured Restaurant/Store</h2>
+                <p>The nearest restaurant/store to your location</p>
+            </div>
+
+            <div class="mt-5 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                @foreach ($vendors as $vendor)
+                    <div class="shadow-md hover:shadow-lg shadow-[gray] rounded-lg overflow-hidden duration-300">
+                        <img class="w-full h-[200px] object-cover" src="{{ asset(Storage::url($vendor->profile)) }}"
+                            alt="">
+
+                        <div class="p-3">
+                            <h3 class="font-semibold">
+                                {{ $vendor->name }}
+                            </h3>
+                            <p>
+                                {{ $vendor->address }}
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     <section>
         <div class="w-[66%] m-auto py-10 text-center">
             <h1 class="text-3xl mb-8">
@@ -7,7 +35,8 @@
             </h1>
             <div class="grid md:grid-cols-2 gap-10">
                 <div>
-                    <img src="https://www.gemgovregistration.com/images/vendor-registration-services.jpg" alt="">
+                    <img src="https://www.gemgovregistration.com/images/vendor-registration-services.jpg"
+                        alt="">
                 </div>
 
                 <div>

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 
 class VendorObserver
 {
+
     /**
      * Handle the Vendor "created" event.
      */
