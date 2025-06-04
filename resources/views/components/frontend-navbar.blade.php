@@ -1,4 +1,4 @@
-<header class="bg-[var(--primary-color)] py-3 shadow-md sticky top-0">
+<header class="bg-[var(--primary-color)] py-3 shadow-md sticky top-0 z-50">
     <nav class="container flex justify-between items-center gap-10">
         <div class="w-[25%]">
             <img class="h-[40px]" src="{{ asset(Storage::url($company->logo)) }}" alt="">

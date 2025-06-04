@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Mail\VendorRequestNotification;
 use App\Models\Admin;
+use App\Models\Product;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -38,5 +39,24 @@ class PageController extends BaseController
         Mail::to($admins)->send(new VendorRequestNotification($vendor));
         toast("Your request has been successfull submitted!", "success");
         return redirect()->back();
+    }
+
+    public function shop($id)
+    {
+        $vendor = Vendor::where("status", "approved")->where('id', $id)->first();
+        if (!$vendor) {
+            return view('404');
+        }
+        $products = $vendor->products()->where('status', true)->get();
+        return view('frontend.vendor', compact("vendor", "products"));
+    }
+
+    public function product($id)
+    {
+        $product = Product::where("status", true)->where('id', $id)->first();
+        if (!$product) {
+            return view('404');
+        }
+        return view('frontend.product', compact( "product"));
     }
 }

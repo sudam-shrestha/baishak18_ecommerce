@@ -10,17 +10,19 @@
             <div class="mt-5 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 @foreach ($vendors as $vendor)
                     <div class="shadow-md hover:shadow-lg shadow-[gray] rounded-lg overflow-hidden duration-300">
-                        <img class="w-full h-[200px] object-cover" src="{{ asset(Storage::url($vendor->profile)) }}"
-                            alt="">
+                        <a href="{{route('shop', $vendor->id)}}">
+                            <img class="w-full h-[200px] object-cover" src="{{ asset(Storage::url($vendor->profile)) }}"
+                                alt="">
 
-                        <div class="p-3">
-                            <h3 class="font-semibold">
-                                {{ $vendor->name }}
-                            </h3>
-                            <p>
-                                {{ $vendor->address }}
-                            </p>
-                        </div>
+                            <div class="p-3">
+                                <h3 class="font-semibold">
+                                    {{ $vendor->name }}
+                                </h3>
+                                <p>
+                                    {{ $vendor->address }}
+                                </p>
+                            </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
