@@ -57,6 +57,21 @@ class PageController extends BaseController
         if (!$product) {
             return view('404');
         }
-        return view('frontend.product', compact( "product"));
+        return view('frontend.product', compact("product"));
+    }
+
+
+    public function compare(Request $request)
+    {
+        $q = $request->q;
+        $min = $request->min;
+        $max = $request->max;
+        if (!$min && !$max) {
+            $products = Product::where('name', "like", "%$q%")->orderBy("price", "asc")->get();
+            return view('frontend.compare', compact("products", "q"));
+        }
+
+        $products = Product::where('name', "like", "%$q%")->orderBy("price", "asc")->whereBetween('price', [$min, $max])->get();
+        return view('frontend.compare', compact("products", "q", "min", "max"));
     }
 }
