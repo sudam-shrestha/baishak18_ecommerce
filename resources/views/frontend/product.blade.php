@@ -248,7 +248,8 @@
                         @foreach ($product->images as $index => $image)
                             <div class = "img-item">
                                 <a href = "#" data-id = "{{ ++$index }}">
-                                    <img class="h-[120px] w-[120px] object-cover" src = "{{ asset(Storage::url($image)) }}" alt = "{{ ++$index }}">
+                                    <img class="h-[120px] w-[120px] object-cover"
+                                        src = "{{ asset(Storage::url($image)) }}" alt = "{{ ++$index }}">
                                 </a>
                             </div>
                         @endforeach
@@ -256,8 +257,8 @@
                 </div>
                 <!-- card right -->
                 <div class = "product-content">
-                    <h1 class = "text-2xl">{{$product->name}}</h1>
-                    <a href = "#" class = "product-link">BRAND: {{$product->brand}}</a>
+                    <h1 class = "text-2xl">{{ $product->name }}</h1>
+                    <a href = "#" class = "product-link">BRAND: {{ $product->brand }}</a>
                     <div class = "product-rating">
                         <i class = "fas fa-star"></i>
                         <i class = "fas fa-star"></i>
@@ -278,11 +279,16 @@
                     </div>
 
                     <div class = "purchase-info">
-                        <input type = "number" min = "0" value = "1">
-                        <button type = "button" class = "btn">
-                            Add to Cart <i class = "fas fa-shopping-cart"></i>
-                        </button>
-                        <button type = "button" class = "btn">Compare</button>
+                        <form action="{{ route('add_to_cart') }}" method="post">
+                            @csrf
+                            <input type = "number" name="qty" min = "1" max="10" value = "1">
+                            <input type = "number" name="product_id" min = "1" max="10"
+                                value = "{{ $product->id }}" hidden>
+                            <button type = "submit" class = "btn">
+                                Add to Cart <i class = "fas fa-shopping-cart"></i>
+                            </button>
+                            <button type = "button" class = "btn">Compare</button>
+                        </form>
                     </div>
 
                     <div class = "social-links">

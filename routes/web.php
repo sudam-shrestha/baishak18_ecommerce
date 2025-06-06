@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\PageController;
+use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,11 @@ Route::post("/vendor-request", [PageController::class, 'vendor_request'])->name(
 Route::get("/shop/{id}", [PageController::class, 'shop'])->name('shop');
 Route::get("/product/{id}", [PageController::class, 'product'])->name('product');
 Route::get("/compare", [PageController::class, 'compare'])->name('compare');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post("/add-to-cart", [UserController::class, 'add_to_cart'])->name('add_to_cart');
+    Route::get("/carts", [UserController::class, 'carts'])->name('carts');
+});
 
 Route::fallback(function () {
     return view('404');
