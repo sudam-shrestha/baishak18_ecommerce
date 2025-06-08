@@ -282,7 +282,7 @@
                         <form action="{{ route('add_to_cart') }}" method="post">
                             @csrf
                             <input type = "number" name="qty" min = "1" max="10" value = "1">
-                            <input type = "number" name="product_id" min = "1" max="10"
+                            <input type = "number" name="product_id"
                                 value = "{{ $product->id }}" hidden>
                             <button type = "submit" class = "btn">
                                 Add to Cart <i class = "fas fa-shopping-cart"></i>

@@ -24,6 +24,13 @@
         <div class="mt-4 text-center">
             <a href="{{ route('register') }}" class="text-blue-500 text-sm">Don't have an account?</a><br>
             <a href="{{ route('password.request') }}" class="text-blue-500 text-sm">Forgot Password?</a>
+
+            <div>
+                <a href="{{ route('google.redirect') }}" class="btn btn-primary">
+                    <img class="h-[80px]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR_BYUnqdd7FOMK_wngwZuUmPC9q5oPrhFpg&s"
+                        alt="">
+                </a>
+            </div>
         </div>
     </form>
 </body>

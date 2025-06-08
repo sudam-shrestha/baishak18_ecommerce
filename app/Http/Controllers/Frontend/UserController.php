@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AvailableAddress;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\User;
@@ -55,5 +56,42 @@ class UserController extends BaseController
 
         // Step 5: Pass to view
         return view('frontend.carts', compact('vendors', 'groupedCarts'));
+    }
+
+
+    public function checkout($id)
+    {
+        $vendor = Vendor::where('id', $id)->where('status', 'approved')->firstOrFail();
+
+        $user = User::find(Auth::user()->id);
+
+        // Get only carts for the specific vendor with approved status
+        $vendorCarts = $user->carts()
+            ->whereHas('product.vendor', function ($query) use ($id) {
+                $query->where('id', $id)->where('status', 'approved');
+            })
+            ->with('product.vendor')
+            ->get();
+
+        $addresses = AvailableAddress::where('vendor_id', $id)->get();
+        return view('frontend.checkout', compact('vendor', 'vendorCarts', 'addresses'));
+    }
+
+    public function order_store(Request $request, $id)
+    {
+        $vendor = Vendor::where('id', $id)->where('status', 'approved')->firstOrFail();
+
+        $user = User::find(Auth::user()->id);
+
+        // Get only carts for the specific vendor with approved status
+        $vendorCarts = $user->carts()
+            ->whereHas('product.vendor', function ($query) use ($id) {
+                $query->where('id', $id)->where('status', 'approved');
+            })
+            ->with('product.vendor')
+            ->get();
+
+        return $request;
+        return view('frontend.checkout', compact('vendor', 'vendorCarts', 'addresses'));
     }
 }
