@@ -23,13 +23,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get("/carts", [UserController::class, 'carts'])->name('carts');
     Route::get("/checkout/{id}", [UserController::class, 'checkout'])->name('checkout');
     Route::post("/order_store/{id}", [UserController::class, 'order_store'])->name('order_store');
+
+    Route::get('/khalti', [UserController::class, 'khalti']);
 });
 
 // Login with google
 Route::get('/google/redirect', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
 
-Route::get("/detail/{record}", function($record){
+Route::get("/detail/{record}", function ($record) {
     $order = Order::find($record);
     return view('order_details', compact('order'));
 })->name('detail');

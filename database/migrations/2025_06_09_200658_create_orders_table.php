@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("contact");
             $table->double("total_amount");
             $table->string("status")->default("pending");
+            $table->string("payment_status")->default("not_paid");
             $table->timestamps();
         });
     }

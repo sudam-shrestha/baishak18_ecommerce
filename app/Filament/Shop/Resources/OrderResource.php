@@ -33,7 +33,7 @@ class OrderResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::where('status','pending')->count();
+        return static::getModel()::where('status', 'pending')->count();
     }
 
     public static function form(Form $form): Form
@@ -94,6 +94,16 @@ class OrderResource extends Resource
                         "processing" => "processing",
                         "for_delivery" => "for_delivery",
                         "completed" => "completed",
+                    ]),
+                Tables\Columns\SelectColumn::make('payment_status')
+                    ->options([
+                        "not_paid" => "not_paid",
+                        "Completed" => "Completed",
+                        "Pending" => "Pending",
+                        "Initiated" => "Initiated",
+                        "Refunded" => "Refunded",
+                        "Expired" => "Expired",
+                        "User canceled" => "User canceled",
                     ]),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
