@@ -2,6 +2,18 @@
 
     <section>
         <div class="container py-10">
+            <div class="space-y-4">
+                @foreach ($advertises as $advertise)
+                    @if ($advertise->ad_position == 'featured')
+                        <div>
+                            <a href="{{ $advertise->redirect_url }}" target="_blank">
+                                <img class="w-full h-[120px] object-cover"
+                                    src="{{ asset(Storage::url($advertise->image)) }}" alt="">
+                            </a>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
             <div>
                 <h2 class="text-2xl text-[var(--primary-color)]">Featured Restaurant/Store</h2>
                 <p>The nearest restaurant/store to your location</p>
@@ -10,7 +22,7 @@
             <div class="mt-5 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 @foreach ($vendors as $vendor)
                     <div class="shadow-md hover:shadow-lg shadow-[gray] rounded-lg overflow-hidden duration-300">
-                        <a href="{{route('shop', $vendor->id)}}">
+                        <a href="{{ route('shop', $vendor->id) }}">
                             <img class="w-full h-[200px] object-cover" src="{{ asset(Storage::url($vendor->profile)) }}"
                                 alt="">
 
@@ -31,6 +43,16 @@
 
     <section>
         <div class="w-[66%] m-auto py-10 text-center">
+            <div>
+                @foreach ($advertises as $advertise)
+                    @if ($advertise->ad_position == 'form')
+                        <a href="{{ $advertise->redirect_url }}" target="_blank" class="mb-4">
+                            <img class="w-full h-[120px] object-cover"
+                                src="{{ asset(Storage::url($advertise->image)) }}" alt="">
+                        </a>
+                    @endif
+                @endforeach
+            </div>
             <h1 class="text-3xl mb-8">
                 List your Restaurant or Store at Floor Digital Pvt. Ltd.!
                 Reach 1,00,000 + new customers.
